@@ -1,0 +1,5 @@
+This directory performs LDA on the utterances of ITS language data to obtain representations of the entire utterance.
+
+directories:
+./gmm-vq : trains the gmm models to perform the vanilla vq.
+./ds: stores the HTK features.

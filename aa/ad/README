@@ -1,0 +1,45 @@
+This directory holds the scripts for learning the assessors decision.
+
+This is done at phone level, due the annotation level
+
+The elements used for this are:
+
+#GOP score
+#Phone embedding from a VAE
+#LDA topic posteriors for the utterance
+
+The gop score and segmentarion for the embeddings come from the H5PY dataset format located at:
+/aa/vae_ph/h5/INA_wav_mel80.h5
+
+This was assembled using:
+/aa/vae_ph/task/run_pre_mel.sh
+
+The organization of the dataset is:
+For every utterance:
+		-mel : the mel spectogram in decibels. The initial and final silences have been left out
+		-speaker: The speaker ID as int.
+		-phone : the phone labels for every frame. The phone dictionary can be seen at /share/mini1/res/t/asr/call/childread-nl/its/aa/vae_ph/task/preprocess_mel.py
+		-time_info : for every phone segment (not silence), the start and ending time in the utterance.
+		-frame_info : for every phone segment (not silence), the corresponding mel spectogram indexes. The indeces are obtained from the alignment.
+		-scores_info : the corresponding GOP score for the phone segments.
+		-ph_seq : The sequence of phone segments. This based on the annotation reference.
+		
+		
+PHONEME_DICT = { 'aa': 0, 'ae': 1, 'ah': 2, 'ao': 3, 'aw': 4, 'ax': 5, 'ay': 6, 'b': 7, 'ch': 8, 'd': 9,
+                    'dh': 10, 'ea': 11, 'eh': 12, 'el': 13, 'em': 14, 'en': 15, 'er': 16, 'ey': 17, 'f': 18, 'g': 19,
+                    'hh': 20, 'ia': 21, 'ih': 22, 'iy': 23, 'jh': 24, 'k': 25, 'l': 26, 'm': 27, 'n': 28, 'ng': 29, 'oh': 30,
+                    'ow': 31, 'oy': 32, 'p': 33, 'r': 34, 's': 35, 'sh': 36, 'silsp': 37, 't': 38, 'th': 39, 'ua': 40, 'uh': 41,
+                    'uw': 42, 'v': 43, 'w': 44, 'y': 45, 'z': 46, 'zh': 47 }
+					
+
+The models generate embeddings stored at ./emb
+
+***Different scripts and their use:
+
+./run_ffwd.sh : train a feedforward model to predict the assessors decision. This outputs a single posterior probability of wheter the assessor would have detected a mispronunciation in the given segment.
+./run_ffwd_rnd.sh: Same as run_ffwd.sh but for one of the 3 random data splits. This was the fastest way to deal with an unexpected naming conception.
+./select_epoch_testloss: selects the trained model with the lowest lost in a selected dataset
+./gen_a_enc: generates acoustic encodings using a previously trained VAE
+./ffwd_post.sh: Similar to ffwd_label.sh it outputs the posterior probability and saves it as a dataframe with a different format. This was bad format planning. It can also generate posteriors for multiple model epochs in a loop.
+./plot_post_hist.sh: Draws histograms of the segment posteriors. It can also deal with an arange of model epochs. It requires for ffwd_post.sh to be run first.
+

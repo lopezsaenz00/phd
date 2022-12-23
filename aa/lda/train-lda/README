@@ -1,0 +1,5 @@
+In this directory use:
+
+./train_lda.sh to train the lda model
+./lda_posterior.sh generates the topic-posterior probabilities for a given scp file (gmm/vq-labels) using a specific lda model.
+ 
