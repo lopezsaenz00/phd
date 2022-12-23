@@ -4,6 +4,7 @@
 Created on Fri December 04 15:46:00 2020
 
 @author: Jose Antonio Lopez @ The University of Sheffield
+
 This script generates VAE embeddings for the acoustic segments.
 
 """

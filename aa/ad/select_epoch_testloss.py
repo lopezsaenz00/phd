@@ -3,7 +3,7 @@
 """
 Created on Thurs November 05 12:59:00 2020
 
-@author: Jose Antonio Lopez @ The University of Sheffield (House arrest)
+@author: Jose Antonio Lopez @ The University of Sheffield (COVID years)
 
 """
 

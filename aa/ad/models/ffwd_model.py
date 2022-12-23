@@ -1,3 +1,10 @@
+"""
+Created on Fri December 04 15:46:00 2020
+
+@author: Jose Antonio Lopez @ The University of Sheffield
+Modules for the FFWD Assessor decision model.
+
+"""
 import torch
 import torch.nn.functional as F
 import torch.nn as nn

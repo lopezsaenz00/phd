@@ -1,7 +1,12 @@
 #!/bin/bash
 
+#@author: Jose Antonio Lopez @ The University of Sheffield
+
 #the scripts loads the dataset and labels it using the specified ffwd model.
 #it generates an output text file with the phone segment and the decision of the model. 
+
+
+
 
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/python/anaconda3-5.1.0/v5.1.0/envs/new-tf-gpu/lib
 source activate new-tf-gpu

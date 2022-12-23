@@ -1,6 +1,8 @@
 #!/bin/bash
+#@author: Jose Antonio Lopez @ The University of Sheffield
 
-#extract PLP features for the INA set
+#submits the PLP features extractor for the INA set
+
 
 FEAT=fbk  #{fbk, plp, melspect}
 

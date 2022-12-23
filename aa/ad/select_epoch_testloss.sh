@@ -1,8 +1,11 @@
 #!/bin/bash
 
+#Created on November 05 2020
+
+#@author: Jose Antonio Lopez @ The University of Sheffield
+
 #This method loads the train_stats dictionary and returns the model epoch with the lowest test loss shown during training
 
-# Antonio Lopez 05/11/2020
 
 DATE=`date '+%Y-%m-%d %H:%M:%S'`
 

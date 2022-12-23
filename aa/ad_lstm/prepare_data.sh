@@ -1,8 +1,14 @@
 #!/bin/bash
+"""
+Created on February 2021
 
+@author: Jose Antonio Lopez @ The University of Sheffield
+
+This script submits the creator of the dataset objects to train the assessor model
+
+"""
 
 SUBMITJOB='submitjob -m 5000'
-#SUBMITJOB='submitjob -q GPU -o -l hostname="node24|node23|node25|node26" -eo'
 WAITJOB='-w 6267593'
 
 export  HDF5_USE_FILE_LOCKING=FALSE

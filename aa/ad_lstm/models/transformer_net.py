@@ -1,4 +1,10 @@
-# attention network
+"""
+
+@author: Jose Antonio Lopez @ The University of Sheffield
+
+Torch modules for the transformer network for the assessor model
+
+"""
 import copy
 import torch
 import torch.nn as nn

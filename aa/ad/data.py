@@ -1,3 +1,11 @@
+"""
+Created on Nov 2020
+
+@author: Jose Antonio Lopez @ The University of Sheffield
+
+Dataset object for training the assessor decision model.
+
+"""
 import torch.utils.data as data
 import pandas as pd
 import json

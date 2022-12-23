@@ -5,8 +5,7 @@ Modified on Tue Feb 17 19:32:00 2020
 From Mingjie Chen
 From Rossana Milner
 From Asif Jalal
-check project:
-/share/mini1/res/t/emo/mix/seg/iem/blstmatt
+check project: blstmatt
 @author: Jose Antonio Lopez @ The University of Sheffield
 
 """

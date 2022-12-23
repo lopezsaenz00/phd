@@ -1,4 +1,10 @@
-# attention network
+"""
+
+@author: Jose Antonio Lopez @ The University of Sheffield
+
+Torch modules for the lstm+attn network
+
+"""
 import torch
 import torch.nn as nn
 import torch.nn.functional as F

@@ -1,6 +1,9 @@
 #!/bin/bash
+#@author: Jose Antonio Lopez @ The University of Sheffield
 
-# From a previously trained lda model , obtain posteriors across speakers.
+#submits the lda posterior generator. To obtain posteriors across speakers.
+
+
 
 DATE=`date '+%Y-%m-%d %H:%M:%S'`
 

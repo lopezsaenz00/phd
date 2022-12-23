@@ -1,6 +1,8 @@
 #!/bin/bash
+#@author: Jose Antonio Lopez @ The University of Sheffield
 
 #generate samples of window size with a stride for the INA set. it also alocates the phoneme labels given the original alignment
+
 
 WD=/share/mini1/res/t/asr/call/childread-nl/its/aa/ad_lstm
 

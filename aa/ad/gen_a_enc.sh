@@ -1,6 +1,11 @@
 #!/bin/bash
+#Created on December 2020
+
+#@author: Jose Antonio Lopez @ The University of Sheffield
 
 #the scripts generates the embeddings for every assessor model. technically the same as the label
+
+
 
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/python/anaconda3-5.1.0/v5.1.0/envs/new-tf-gpu/lib
 source activate new-tf-gpu

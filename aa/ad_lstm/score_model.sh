@@ -1,5 +1,9 @@
 #!/bin/bash
-#obtain the posterior probabilitis to score the performance of the models
+#Created on Fri December 04 15:46:00 2020
+
+#@author: Jose Antonio Lopez @ The University of Sheffield
+
+#this script submits the generator of posterior probabilities to score the performance of the models
 
 
 SUBMITJOB='submitjob -g1 -M4 -o -l gputype="GeForceGTXTITANX|GeForceGTX1080Ti|" -eo'

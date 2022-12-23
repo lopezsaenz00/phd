@@ -1,9 +1,12 @@
 #!/bin/bash
+#Created on Nov 05 2020
+
+#@author: Jose Antonio Lopez @ The University of Sheffield
 
 #This method picks up the pickled dictionary containing all the training log data and plots multiple graphs about it.
 #This is for mel80 dB specotrograms
 
-# Antonio Lopez 05/11/2020
+
 
 DATE=`date '+%Y-%m-%d %H:%M:%S'`
 

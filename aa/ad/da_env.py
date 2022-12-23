@@ -1,22 +1,18 @@
 # encoding: utf-8
-
-# ----------------------------------------------------------------------------
-# Created by Antonio Lopez, University of Sheffield, 26 Nov 2020
-# ----------------------------------------------------------------------------
-
 """
-#
-# ----------------------------------------------------------------------------
-# This files sets main data configurations.
-# ----------------------------------------------------------------------------
-#
+Created on 26 Nov 2020
+
+@author: Jose Antonio Lopez @ The University of Sheffield, 26 Nov 2020
+
+This files sets main data configurations for itslfat.
+
 """
 
 import os
 
 SUBSET = 'train'
 
-WAV_SCP='/share/mini1/res/t/asr/call/childread-nl/its/aa/lib/INA.v1.cut1-6.phone.'+SUBSET.lower()
+WAV_SCP='/aa/lib/INA.v1.cut1-6.phone.'+SUBSET.lower()
 
 # ----------------------------------------------------------------------------
 # GOP SCORE or equivalent. Say 'post' for example which is the absolute phone posterior 

@@ -1,5 +1,9 @@
 #!/bin/bash
-#export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/python/anaconda3-5.1.0/v5.1.0/envs/new-tf-gpu/lib
+#@author: Jose Antonio Lopez @ The University of Sheffield
+
+#submits the Mel spectogram generator for the INA set
+
+
 
 MODE=post  #{dic, dic2} dic2 uses a stricter acostic model for gop
 MEL_FILTERS=80

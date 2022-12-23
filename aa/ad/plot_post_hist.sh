@@ -1,8 +1,11 @@
 #!/bin/bash
 
+#@author: Jose Antonio Lopez @ The University of Sheffield
+
 #the scripts generates histograms of the posterior probailities
 
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/share/mini1/sw/std/python/anaconda3-5.1.0/v5.1.0/envs/new-tf-gpu/lib
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/python/anaconda3-5.1.0/v5.1.0/envs/new-tf-gpu/lib
 source activate new-tf-gpu
 
 

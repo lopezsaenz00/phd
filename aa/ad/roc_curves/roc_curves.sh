@@ -1,9 +1,13 @@
 #!/bin/bash
+#Created on August 09 2020
 
-# this script models the triggers for the different phones
-#this script is just for the post mode
+#@author: Jose Antonio Lopez @ The University of Sheffield
+
+#this script models the triggers for the different phones
+#this script is just for the posterior mode
 #run first the label script
-# Antonio Lopez 09/08/2020
+
+
 
 DATE=`date '+%Y-%m-%d %H:%M:%S'`
 

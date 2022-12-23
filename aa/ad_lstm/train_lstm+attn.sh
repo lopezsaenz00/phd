@@ -1,5 +1,7 @@
 #!/bin/bash
-# This script trains the lstm+attention model for mispronunciation detection
+#@author: Jose Antonio Lopez @ The University of Sheffield
+
+# This script submits the trainer for the lstm+attention model for mispronunciation detection
 
 
 SUBMITJOB='submitjob -q GPU -o -l hostname="node24|node23|node25|node26" -eo'

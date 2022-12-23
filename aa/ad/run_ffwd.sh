@@ -1,6 +1,10 @@
 #!/bin/bash
 
+#@author: Jose Antonio Lopez @ The University of Sheffield
+
 #trains a ffwd forthe assessors decision.
+
+
 
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/python/anaconda3-5.1.0/v5.1.0/envs/new-tf-gpu/lib
 source activate new-tf-gpu

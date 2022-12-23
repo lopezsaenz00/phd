@@ -1,4 +1,9 @@
 #!/bin/bash
+#Created on Fri December 04 15:46:00 2020
+
+#@author: Jose Antonio Lopez @ The University of Sheffield
+
+#This script generates VAE embeddings for the acoustic segments.
 
 
 SUBMITJOB='submitjob -q GPU -o -l hostname="node24|node23|node25|node26" -eo'

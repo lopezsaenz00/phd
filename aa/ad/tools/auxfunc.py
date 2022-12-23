@@ -1,12 +1,13 @@
-# =======================================================
-# PROVIDES
-# =======================================================
+"""
+
+@author: Jose Antonio Lopez @ The University of Sheffield
+
+add method with flooring
+
+"""
 
 __all__ = ['ladd']
 
-# =======================================================
-# IMPORTS
-# =======================================================
 
 import numpy as np
 #from numba import jit
@@ -14,9 +15,6 @@ import numpy as np
 # local
 from const import *
 
-# =======================================================
-# general functions
-# =======================================================
 
 #@jit(nopython=True)
 def ladd(x, y):
