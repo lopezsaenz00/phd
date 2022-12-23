@@ -1,8 +1,7 @@
 #!/bin/bash
-# created on Nov 16 2020
-# @author: Jose Antonio Lopez @ Infirmary Rd
-# submits the LDA trainer.
-
+# Created on 27 Nov 19
+# train LDA model with the VQ squence of the dataset
+# Antonio Lopez 27 Nov 19
 
 DATE=`date '+%Y-%m-%d %H:%M:%S'`
 
