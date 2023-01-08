@@ -194,14 +194,10 @@ def load_model(pretrained_model, network, TRAIN_MODE):
         checkpoint = torch.load(pretrained_model, map_location=lambda storage, location: storage)
         
     epoch = checkpoint['epoch']
-    # train_loss = checkpoint['train_loss']
-    # test_loss = checkpoint['test_loss']
-    #LEARNING_RATE = checkpoint['LEARNING_RATE']
     encoder.load_state_dict(checkpoint['encoder'])
     attention.load_state_dict(checkpoint['attention'])
     predictor.load_state_dict(checkpoint['predictor'])
     optimizer.load_state_dict(checkpoint['optimizer'])
-    #print("Loaded model (%s) at epoch (%d) with loss (%.4f) and LEARNING_RATE (%f)" % (pretrained_model, epoch, accumulated_loss, LEARNING_RATE))
     print("Loaded model (%s) at epoch (%d) " % (pretrained_model, epoch))
 
     if TRAIN_MODE:
@@ -221,14 +217,12 @@ def model_init(args, TRAIN_MODE):
     encoder = LstmNet(args.input_size, args.lstm_hid, args.lstm_layers, args.lstm_out, args.nclass)
     attention = Attention( args.lstm_out, args.att_hid)
     predictor = Predictor(args.nclass, args.lstm_out)
-#    domainclassifier = DomainClassifier(num_domains, dan_hidden_size, c, num_dom_layers)
 
     # use cuda
     if use_cuda:
         encoder = encoder.cuda()
         attention = attention.cuda()
         predictor = predictor.cuda()
-#        domainclassifier = domainclassifier.cuda()
 
     # train or test mode
     if TRAIN_MODE: 
@@ -236,12 +230,10 @@ def model_init(args, TRAIN_MODE):
         encoder.train()
         attention.train()
         predictor.train()
-#        domainclassifier.train()
     else:
         encoder.eval()
         attention.eval()
         predictor.eval()
-#        domainclassifier.eval()
 
     params = list(encoder.parameters()) + list(attention.parameters()) + list(predictor.parameters())
     print('Parameters:encoder = %d' % len(list(encoder.parameters())))
@@ -253,7 +245,6 @@ def model_init(args, TRAIN_MODE):
     # different update rules - Adam: A Method for Stochastic Optimization
     optimizer = torch.optim.Adam(params, lr=args.lr)
 
-#    return [encoder, attention, predictor, domainclassifier, optimizer]
     return [encoder, attention, predictor, optimizer]
     
 #performs update step for the model
@@ -293,10 +284,6 @@ def train(tr_loader,te_loader,network, stats_dict, criterion ):
         predictor.train()
         
         
-#        if LR_schedule == "StepLR":
-#            scheduler.step()
-#            print("LR scheduler: %s, LR=%f" % (LR_schedule,get_lr(network[-1])))
-
         #go tru the dataloader
         batchloss = Welford()
         for step, (feat, target) in enumerate(tr_loader):
@@ -413,10 +400,5 @@ if __name__ == '__main__':
     
     critetion = define_loss()
     
-#    # learning rate decay
-#    if LR_schedule == "StepLR":
-#        scheduler = torch.optim.lr_scheduler.StepLR(network[-1], step_size=LR_size, gamma=LR_factor)     # optimizer
-#    elif LR_schedule == "ReduceLROnPlateau":
-#        scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(network[-1], 'min', patience=LR_size, factor=LR_factor)
     
     train(train_dataloader,test_dataloader,network, stats_dict, critetion )

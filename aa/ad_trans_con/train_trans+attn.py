@@ -5,7 +5,8 @@ Modified on Tue Feb 17 19:32:00 2020
 From Mingjie Chen
 From Rossana Milner
 From Asif Jalal
-check project: blstmatt
+check project:
+
 @author: Jose Antonio Lopez @ The University of Sheffield
 
 """
@@ -14,17 +15,18 @@ import sys, os
 import json
 import pickle
 import argparse
-from data import INAWinData
+from INA_data import INAWinData
 import torch
 from torch.utils.data import DataLoader
 import torch.nn as nn
 import torch.optim as optim
 sys.path.append('/aa/ad_lstm/tools')
-from models.attention_network import LstmNet
+#from models.attention_network import LstmNet
+from models.attention_network import TransformerEncoder
 from models.attention_network import Add_N_Norm
 from models.attention_network import Predictor
 from models.attention_network import CNNPredictor
-from models.attention_network import BahdanauAttention
+#from models.attention_network import BahdanauAttention
 from welford import Welford
 import numpy as np
 import load_txt
@@ -64,17 +66,14 @@ parser.add_argument('--stats_dict',type=str,default='./json/train_stats/')
 parser.add_argument('--wind',type=str,default='0.5')
 parser.add_argument('--str',type=str,default='0.1')
 parser.add_argument('--ctf',type=int,default=0)
-##network params
-parser.add_argument('--lstm_hid',type=int,default=1)
-parser.add_argument('--lstm_layers',type=int,default=1)
+parser.add_argument('--tr_heads',type=int,default=3)
+parser.add_argument('--tr_fwd_dim',type=int,default=1024)
+parser.add_argument('--tr_layers',type=int,default=1)
+parser.add_argument('--tr_norm', default=False,action='store_true')
 parser.add_argument('--pred_layers',type=int,default=0)
 parser.add_argument('--pred_hid',type=str,default='128')
-parser.add_argument('--o_channels',type=str,default='4')
-parser.add_argument('--cnv_k_size',type=int,default=3)
-parser.add_argument('--cnv_stride',type=int,default=1)
-parser.add_argument('--att_hid',type=int,default=1)
-parser.add_argument('--att_soft_dim',type=int,default=1)
-parser.add_argument('--dropp',type=float,default=0.1)
+
+
 ##training
 parser.add_argument('--lr',type=float,default=1e-3)
 parser.add_argument('--nw', default=False,action='store_true')
@@ -201,11 +200,15 @@ def load_model(pretrained_model, network, TRAIN_MODE):
         checkpoint = torch.load(pretrained_model, map_location=lambda storage, location: storage)
         
     epoch = checkpoint['epoch']
+    # train_loss = checkpoint['train_loss']
+    # test_loss = checkpoint['test_loss']
+    #LEARNING_RATE = checkpoint['LEARNING_RATE']
     encoder.load_state_dict(checkpoint['encoder'])
     attention.load_state_dict(checkpoint['attention'])
     add_n_norm.load_state_dict(checkpoint['add_n_norm'])
     predictor.load_state_dict(checkpoint['predictor'])
     optimizer.load_state_dict(checkpoint['optimizer'])
+    #print("Loaded model (%s) at epoch (%d) with loss (%.4f) and LEARNING_RATE (%f)" % (pretrained_model, epoch, accumulated_loss, LEARNING_RATE))
     print("Loaded model (%s) at epoch (%d) " % (pretrained_model, epoch))
 
     if TRAIN_MODE:
@@ -236,12 +239,14 @@ def model_init(args, TRAIN_MODE):
         predictor = Predictor(args.nclass, args.lstm_hid*2*args.seglen, args.pred_hid,args.pred_layers)
 
 
+
     # use cuda
     if use_cuda:
         encoder = encoder.cuda()
         attention = attention.cuda()
         add_n_norm = add_n_norm.cuda()
         predictor = predictor.cuda()
+
 
     # train or test mode
     if TRAIN_MODE: 
@@ -250,11 +255,13 @@ def model_init(args, TRAIN_MODE):
         attention.train()
         add_n_norm.train()
         predictor.train()
+
     else:
         encoder.eval()
         attention.eval()
         add_n_norm.eval()
         predictor.eval()
+
 
     params = list(encoder.parameters()) + list(attention.parameters()) + list(add_n_norm.parameters()) + list(predictor.parameters())
     print('Parameters:encoder = %d' % len(list(encoder.parameters())))
@@ -266,6 +273,7 @@ def model_init(args, TRAIN_MODE):
     # optimizer
     # different update rules - Adam: A Method for Stochastic Optimization
     optimizer = torch.optim.Adam(params, lr=args.lr)
+
 
     return [encoder, attention, add_n_norm, predictor, optimizer]
     
@@ -306,8 +314,14 @@ def train(tr_loader,te_loader,network, stats_dict, criterion ):
         attention.train()
         add_n_norm.train()
         predictor.train()
+        
+        
+#        if LR_schedule == "StepLR":
+#            scheduler.step()
+#            print("LR scheduler: %s, LR=%f" % (LR_schedule,get_lr(network[-1])))
 
         #go tru the dataloader
+        #batchloss = Welford()
         for step, (feat, target) in enumerate(tr_loader):
             #train
             hyp = encoder(feat)
@@ -382,11 +396,9 @@ if __name__ == '__main__':
     args.train_possw = trainset.pos_weight
     args.seglen = trainset.seglen
     if args.nclass == 1:
-        print(f"Tr Possitive examples: {trainset.y.count(1)}")
-        print(f"Tr Negative examples: {trainset.y.count(0)}")
-        print(f"Te Possitive examples: {testset.y.count(1)}")
-        print(f"Te Negative examples: {testset.y.count(0)}")
-    
+        print(f"Possitive examples: {trainset.y.count(1)}")
+        print(f"Negative examples: {trainset.y.count(0)}")
+
     network = model_init(args, True)
     
     #create the folder for the model if it doesn't exist
