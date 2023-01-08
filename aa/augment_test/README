@@ -1,0 +1,7 @@
+.\vae_ph: Train a variational autoencoder using augmented melspectograms
+
+We use a pytorch implementation of Google's Ai SpecAugment. 
+https://github.com/zcaceres/spec_augment
+
+/aa/augment_test/augment_demo
+
